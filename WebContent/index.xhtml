@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html">
+
+	<h:head>
+	<h:outputScript library="js" name="jquery.js" > </h:outputScript>
+	</h:head>
+	<h:body>
+	
+	<script type="text/javascript" >
+	
+	$(document).ready(function() {
+		$('#checkAll').click(function(){
+			if($(this).is(":checked"))
+				$('.checkId').prop('checked' , true)
+				else{
+					$('.checkId').prop('checked' , false)
+				}
+		})
+	})
+	
+	</script>
+	
+	<h:form prependId="true">
+	<h:commandButton value="delete" action="#{ProductController.delete()}" onclick="return confirm('are you sure ?')"  ></h:commandButton>
+	
+	<h:dataTable cellpadding="2" cellspacing="2" border="1" var="p" value="#{ProductController.findAll()}">
+	 <h:column>
+	 <f:facet name="header"><input type="checkbox" id="checkAll"></input> </f:facet>
+	 <input type="checkbox" class="checkId" value="#{p.id}" name="prodname"></input>
+	 </h:column>
+	 
+	 <h:column>
+	 <f:facet name="header"> ProdName</f:facet>
+	 <h:outputText value="#{p.prodname}" />
+	 </h:column>
+	 
+	 <h:column>
+	 <f:facet name="header"> Price</f:facet>
+	 <h:outputText value="#{p.price}" />
+	 </h:column>
+	 
+	 <h:column>
+	 <f:facet name="header"> Describation</f:facet>
+	 <h:outputText value="#{p.describation}" />
+	 </h:column>
+	 
+	 <h:column>
+	 <f:facet name="header"> Photo</f:facet>
+	 <img src="resources/images/#{p.photo}" ></img>
+	 
+	 </h:column> 
+	
+	
+	</h:dataTable>
+	
+	
+	
+	
+	<hr/><hr/>
+	<br/><br/><br/>
+	
+	
+	<h:commandButton value="English" action="#{ProductController.changeLang('en')}" />
+	<h:commandButton value="French" action="#{ProductController.changeLang('fr')}" />
+	<h:commandButton value="Arabic" action="#{ProductController.changeLang('arb')}" />
+	<h:commandButton value="ukrarain" action="#{ProductController.changeLang('ukr')}" />
+	
+	<br/><br/><br/>
+	<hr/><hr/>
+	
+	<h:outputText  value="#{content['message']}" />
+	
+	</h:form>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	 </h:body>
+</html>
